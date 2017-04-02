@@ -5,7 +5,7 @@ An Alpine Linux container running OpenVPN via Private Internet Access
 
 Based on [ColinHebert/pia-openvpn](https://hub.docker.com/r/colinhebert/pia-openvpn/)
 
-## Improvements
+*Improvements*
 * Updated to new PIA configs with strong encryption (AES-256-CBC data encryption, RSA-4096 SSL handshake, SHA256 message authentication)
 * Updated README
 
