@@ -1,7 +1,7 @@
-FROM alpine:latest
+FROM alpine:3.11
 MAINTAINER Ignatius Teo <ignatius.teo@gmail.com>
 
-RUN apk add --no-cache openvpn
+RUN apk update && apk add --no-cache openvpn
 
 COPY pia /pia
 WORKDIR /pia
