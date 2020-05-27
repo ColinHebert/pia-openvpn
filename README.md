@@ -1,6 +1,6 @@
-[![logo](https://www.privateinternetaccess.com/assets/PIALogo2x-09ca10950967bd3be87a5ef7730a69e07892d519cfc8f15228bec0a4f6102cc1.png)](https://www.privateinternetaccess.com)
-
 # Private Internet Access OpenVPN
+
+[![logo](https://www.privateinternetaccess.com/assets/PIALogo2x-09ca10950967bd3be87a5ef7730a69e07892d519cfc8f15228bec0a4f6102cc1.png)](https://www.privateinternetaccess.com)
 
 An Alpine Linux container running OpenVPN via Private Internet Access
 
@@ -11,17 +11,17 @@ Based on [ColinHebert/pia-openvpn](https://hub.docker.com/r/colinhebert/pia-open
 * Updated to new PIA configs with strong encryption (AES-256-CBC data encryption, RSA-4096 SSL handshake, SHA256 message authentication)
 * Updated README
 
-# What is Private Internet Access
+## What is Private Internet Access
 
 Private Internet Access VPN Service encrypts your connection and provides you with an anonymous IP to protect your privacy.
 
-# How to use this image
+## How to use this image
 
 This image provides the configuration files for each region supported by PIA.
 
 The goal is to start this container first, and then run other containers within the PIA VPN via `--network=container:pia`.
 
-## Starting the client
+### Starting the client
 
 ```Shell
 docker run --cap-add=NET_ADMIN --device=/dev/net/tun --name=pia -d \
@@ -43,7 +43,7 @@ Due to the nature of the VPN client, this container must be started with some ad
 
 Starting the container in privileged mode would also achieve this, but keeping the privileges to the minimum required is preferable.
 
-## Creating a container that uses PIA VPN
+### Creating a container that uses PIA VPN
 
 ```Shell
 docker run --rm --network=container:pia appropriate/curl -s ifconfig.co
@@ -51,9 +51,9 @@ docker run --rm --network=container:pia appropriate/curl -s ifconfig.co
 
 The IP address returned after this execution should be different from the IP address you would get without specifying `--net=container:pia`.
 
-# Advanced usage
+## Advanced usage
 
-## Additional arguments for the openvpn client
+### Additional arguments for the openvpn client
 
 Every parameter provided to the `docker run` command is directly passed as an argument to the [openvpn executable](https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage).
 
@@ -65,7 +65,7 @@ docker run ... --name=pia \
     --pull
 ```
 
-## Avoid passing credentials via environment variables
+### Avoid passing credentials via environment variables
 
 By default this image relies on the variables `USERNAME` and `PASSWORD` to be set in order to successfully connect to the PIA VPN.
 
@@ -84,7 +84,7 @@ docker run ... --name=pia \
   act28/pia-openvpn
 ```
 
-## Connection between containers behind PIA
+### Connection between containers behind PIA
 
 Any container started with `--network=container:...` will share the same network stack as the PIA container, therefore they will have the same local IP address.
 
@@ -92,7 +92,7 @@ Any container started with `--network=container:...` will share the same network
 
 [Since Docker 1.9](https://docs.docker.com/engine/userguide/networking/dockernetworks/), it is recommended to use a non default network allowing containers to address each other by name.
 
-### Creating a network
+#### Creating a network
 
 ```Shell
 docker network create vpn
@@ -100,7 +100,7 @@ docker network create vpn
 
 This creates a network called `vpn` in which containers can address each other by name; the `/etc/hosts` is updated automatically for each container added to the network.
 
-### Start the PIA container in the vpn
+#### Start the PIA container in the vpn
 
 ```Shell
 docker run ... --network=vpn --name=pia act28/pia-openvpn
@@ -108,7 +108,7 @@ docker run ... --network=vpn --name=pia act28/pia-openvpn
 
 In `vpn` there is now a resolvable name `pia` that points to that newly created container.
 
-### Create a container behind the PIA VPN
+#### Create a container behind the PIA VPN
 
 This step is the same as the previous one:
 
@@ -119,7 +119,7 @@ docker run ... --network=container:pia --name=myservice
 
 This container is not addressable by name in `vpn`, but given that the network stack used by `myservice` is the same as the `pia` container, they have the same IP address and the service running in this container will be accessible at `http://pia:80`.
 
-### Create a container to access the service
+#### Create a container to access the service
 
 ```Shell
 docker run --rm --network=vpn appropriate/curl -s http://pia/
