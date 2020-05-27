@@ -1,7 +1,5 @@
 # Private Internet Access OpenVPN
 
-[![logo](https://www.privateinternetaccess.com/assets/PIALogo2x-09ca10950967bd3be87a5ef7730a69e07892d519cfc8f15228bec0a4f6102cc1.png)](https://www.privateinternetaccess.com)
-
 An Alpine Linux container running OpenVPN via Private Internet Access
 
 Based on [ColinHebert/pia-openvpn](https://hub.docker.com/r/colinhebert/pia-openvpn/)
