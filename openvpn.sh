@@ -5,6 +5,7 @@ if [ -n "$REGION" ]; then
   set -- "$@" '--config' "${REGION}.ovpn"
 fi
 
+mkdir -p /run/secrets
 touch /run/secrets/auth_conf
 
 if [ -n "$USERNAME" -a -n "$PASSWORD" ]; then
