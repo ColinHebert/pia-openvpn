@@ -33,7 +33,7 @@ docker run --cap-add=NET_ADMIN --device=/dev/net/tun --name=pia -d \
 
 Substitute the environment variables for `REGION`, `USERNAME`, and `PASSWORD` as indicated.
 
-*NOTE 1:* `REGION` is optional. The default region is set to `US East`. `REGION` should match the supported PIA `.opvn` region config. See the [PIA Support page](https://www.privateinternetaccess.com/pages/client-support/#third) for details.
+*NOTE 1:* `REGION` is optional. The default region is set to `Switzerland`. `REGION` should match the supported PIA `.opvn` region config. See the [PIA Support page](https://www.privateinternetaccess.com/pages/client-support/#third) for details.
 
 *NOTE 2:* `USERNAME` and `PASSWORD` is also optional. See __Advanced usage__ below, on how to avoid passing credentials via the environment.
 
@@ -77,7 +77,7 @@ And then bind mount the credential file, like so:
 
 ```Shell
 docker run ... --name=pia \
-  -e 'REGION=US East' \
+  -e 'REGION=Switzerland' \
   -v '</path/to/auth.conf>:/run/secrets/auth_conf' \
   act28/pia-openvpn
 ```

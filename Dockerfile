@@ -16,7 +16,7 @@ COPY --from=config /pia /pia
 COPY openvpn.sh /usr/local/bin/openvpn.sh
 RUN chmod +x /usr/local/bin/openvpn.sh
 
-ENV REGION="US East" \
+ENV REGION="Switzerland" \
     USERNAME="" \
     PASSWORD=""
 
